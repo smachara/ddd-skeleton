@@ -15,8 +15,8 @@ allprojects {
     implementation 'com.vlkan.log4j2:log4j2-logstash-layout:0.19'
 
     // Test
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.2'
   }
 
   test {
@@ -27,9 +27,14 @@ allprojects {
     }
   }
 
-  task hello {
+  task view_paths {
     doLast { task ->
-      println "Je suis $task.project.name"
+      println "$task.project.name"
+      println "------------------"
+      println "Main: $sourceSets.main.java.srcDirTrees"
+      println "   Resources: $sourceSets.main.resources.srcDirTrees"
+      println "Tests: $sourceSets.test.java.srcDirTrees"
+      println "   Resources: $sourceSets.test.resources.srcDirTrees"
     }
   }
 }
@@ -87,4 +92,6 @@ dependencies {
   compile("org.springframework.boot:spring-boot-starter-web")
   compile project(":backoffice")
   compile project(":finess")
+
+  testCompile("org.springframework.boot:spring-boot-starter-test")
 }
